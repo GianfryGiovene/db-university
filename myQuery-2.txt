@@ -1,0 +1,17 @@
+
+'JOIN' QUERIES
+1- SELECT `students`.`id`, `students`.`name`, `students`.`surname` FROM `students` INNER JOIN `degrees` ON `degrees`.`id` = `students`.`degree_id`;
+2- SELECT `degrees`.`id`, `degrees`.`name` FROM `degrees` INNER JOIN `departments` ON `departments`.`id` = `degrees`.`department_id` WHERE `degrees`.`level` = 'magistrale';
+3- SELECT `courses`.`name` AS 'nome corso', `teachers`.`surname` AS 'cognome professore', `teachers`.`id` FROM `courses` INNER JOIN `course_teacher` ON `courses`.`id` = `course_teacher`.`course_id` INNER JOIN `teachers` ON `teachers`.`id` = `course_teacher`.`teacher_id` WHERE `teachers`.`id` = '44';
+4- SELECT `students`.`name` AS 'nomi studenti', `students`.`surname` AS 'cognomi studenti', `degrees`.`name` AS 'nome corso', `departments`.`name` AS 'nome dipartimento' FROM `students` INNER JOIN `degrees` ON `students`.`degree_id` = `degrees`.`id` INNER JOIN `departments` ON `departments`.`id` = `degrees`.`department_id` ORDER BY `students`.`name` ASC;
+5- SELECT `degrees`.`name` AS 'nom corso di laurea',`teachers`.`name`AS 'nome insegnante', `courses`.`name` AS 'nome corso' FROM `degrees` INNER JOIN `courses` ON `courses`.`degree_id` = `degrees`.`id` INNER JOIN `course_teacher` ON `courses`.`id` = `course_teacher`.`course_id` INNER JOIN `teachers` ON `teachers`.`id` = `course_teacher`.`teacher_id`;
+6- SELECT `teachers`.`name` AS 'nomi insegnanti', `teachers`.`surname` AS 'cognomi insegnanti', `teachers`.`id` , `departments`.`name` FROM `teachers` INNER JOIN `course_teacher` ON `teachers`.`id` = `course_teacher`.`teacher_id` INNER JOIN `courses` ON `courses`.`id` = `course_teacher`.`course_id` INNER JOIN `degrees` ON `degrees`.`id` = `courses`.`degree_id` INNER JOIN `departments` ON `departments`.`id` = `degrees`.`department_id` WHERE `departments`.`name` = 'Dipartimento di Matematica';
+7-
+
+
+'GROUP BY' QUERIES
+1- SELECT YEAR(`enrolment_date`), COUNT(id) AS 'QTA Iscritti' FROM `students` GROUP BY YEAR(`enrolment_date`);
+2- SELECT `office_address`, COUNT(`id`) AS 'Qtà per ufficio' FROM `teachers` GROUP BY `office_address` ORDER BY `Qtà per ufficio` DESC
+3- SELECT `exam_id` AS 'ID esame', AVG(`vote`) AS 'media voti' FROM `exam_student` GROUP BY `exam_id`;
+4- SELECT `department_id` AS 'ID Dipartimento', COUNT(`id`) AS 'Qtà Corsi di Laurea' FROM `degrees` GROUP BY `department_id`;
+
